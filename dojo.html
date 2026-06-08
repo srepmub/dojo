@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.3.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2026.3.1/core.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  </head>
+  <body style="height: 100vh" class="container-fluid">
+  <h1 id="banner" style="font-size: 50px; color: white; background-color: green">othello dojo</h1>
+  <fieldset role="group">
+  <input id="load_db" type="file" style="display: none;"></input>
+  <button onclick="document.getElementById('load_db').click();">load</button>
+  <button id="save_db">save</button>
+  <button id="quiz">train</button>
+  <button id="rnd">random</button>
+  <button id="reset">reset</button>
+  <select id="select_color">
+    <option>white</option>
+    <option>black</option>
+    <option>both</option>
+  </select>
+  <select id="select_start">
+    <option>from start</option>
+    <option>from common</option>
+  </select>
+  </fieldset>
+  <select id="select">
+    <option>tiger</option>
+    <option>cow</option>
+  </select>
+
+  <table id="board" style='width:660px; height:660px; border: 8px solid black; margin: 5px'></table>
+
+  <footer style="position: sticky; top: 100vh;">
+  <h1 id="header" style="font-size:30px; color:white; background-color: green">let's go!</h1>
+  </footer>
+  <script type="py" src="./dojo.py">
+  </script>
+  </body>
+</html>

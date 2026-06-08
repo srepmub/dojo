@@ -2,10 +2,9 @@ from collections import defaultdict
 import csv
 import io
 import functools
-from js import document, window, Object
-import pyodide
+from js import document
 from pyodide.ffi import create_proxy
-from js import document, window, Uint8Array, File, URL
+from js import document, Uint8Array, File, URL
 from pyodide.ffi.wrappers import add_event_listener
 import random
 import time
@@ -271,67 +270,6 @@ def computer_move(red=True):
 
     last_comp = cell
 
-
-'''
-@exception
-async def load_db(e=None):
-    global lines, quizpos, randompos, tree
-    quizpos = randompos = None
-    options = {'multiple': False}
-    fileHandles = await window.showOpenFilePicker(Object.fromEntries(pyodide.to_js(options)))
-    f = await fileHandles[0].getFile()
-    bio = csv.DictReader(io.StringIO(await f.text()))
-
-    lines = {}
-    tree = defaultdict(list)
-    for row in bio:
-        lines[row['name']] = row
-
-    select = document.getElementById('select')
-    child = select.lastElementChild
-    while child:
-        select.removeChild(child)
-        child = select.lastElementChild
-
-    for line in lines.values():
-        option = document.createElement('option')
-        option.innerHTML = line['name']
-        select.appendChild(option)
-
-        path = line['path']
-        for i in range(0, len(path), 2):
-            tree[path[:i+2]].append(path)
-
-        line['score'] = '%.2f' % max(float(line['score'])-0.1, 1)
-
-    on_reset(do_select=True)
-
-    ones = len([x for x in lines.values() if float(x['score']) < 5])
-    avg = sum([float(x['score']) for x in lines.values()])/len(lines)
-    title = document.getElementById('header') # TODO merge
-    title.innerHTML = 'loaded %d openings (%.2f avg, %d need work!)' % (len(lines), avg, ones)
-    title.style.background = 'green'
-
-
-@exception
-async def save_db(e=None):
-    options = {}
-    fileHandle = await window.showSaveFilePicker(Object.fromEntries(pyodide.to_js(options)))
-
-    bio = io.StringIO()
-    fieldnames = ('path', 'color', 'name', 'score')
-    writer = csv.DictWriter(bio, fieldnames)
-    writer.writeheader()
-
-    for key in sorted(lines, key=lambda key: float(lines[key]['score'])):
-        writer.writerow(lines[key])
-
-    f = await fileHandle.createWritable()
-    await f.write(bio.getvalue())
-    await f.close()
-'''
-
-
 board = document.getElementById('board')
 for i in range(8):
     tr = document.createElement('tr')
@@ -464,7 +402,4 @@ def main():
 
 
 if __name__ == '__main__':
-    try:
-        main()
-    except:
-        pass
+    main()

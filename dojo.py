@@ -305,6 +305,7 @@ async def upload_file_and_show(e):
         lines = {}
         tree = defaultdict(list)
         for row in bio:
+            row['path'] = row['path'].upper()
             lines[row['name']] = row
 
         select = document.getElementById('select')
